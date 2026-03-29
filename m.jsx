@@ -1,6 +1,6 @@
 export default function POS() {
   const [items, setItems] = useState([]);
-  const services = ["كشف", "تحليل", "أشعة", "دواء"];
+  const services = ["علاج طبيعى", "تحليل", "استشارة", "دواء"];
 
   const addItem = (name) => {
     setItems([...items, { name, price: 50 }]);
