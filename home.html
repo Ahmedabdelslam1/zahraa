@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clinic System</title>
+    <style>
+        body {
+            background: #0f172a;
+            color: white;
+            font-family: Arial;
+        }
+
+        .sidebar {
+            width: 200px;
+            float: right;
+        }
+
+        .btn {
+            display: block;
+            background: #2563eb;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 8px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <div class="btn">المرضى</div>
+    <div class="btn">الدكاترة</div>
+    <div class="btn">الفواتير</div>
+    <div class="btn">الصيدلية</div>
+</div>
+
+<h1>نظام المستوصف</h1>
+
+<div class="grid">
+    <div class="card">كشف 50 جنيه</div>
+    <div class="card">أشعة</div>
+    <div class="card">تحليل</div>
+    <div class="card">دواء</div>
+</div>
+
+<form method="POST" action="/add_patient">
+    <input name="name" placeholder="اسم المريض">
+    <input name="phone" placeholder="رقم الهاتف">
+    <button type="submit">إضافة</button>
+</form>
+
+</body>
+</html>
