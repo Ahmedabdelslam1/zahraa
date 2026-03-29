@@ -9,7 +9,6 @@ CREATE TABLE branches (
     company_id INTEGER
 );
 
-
 CREATE TABLE users (
     id INTEGER PRIMARY KEY,
     username TEXT,
@@ -24,6 +23,7 @@ CREATE TABLE patients (
     phone TEXT,
     branch_id INTEGER
 );
+
 CREATE TABLE products (
     id INTEGER PRIMARY KEY,
     name TEXT,
