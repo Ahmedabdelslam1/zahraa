@@ -5,6 +5,17 @@ app = Flask(__name__)
 
 def db():
     return sqlite3.connect("system.db")
+    
+@app.route("/invoice", methods=["POST"])
+def invoice():
+    data = request.json
+    total = data["total"]
+
+    db.execute("INSERT INTO invoices (total) VALUES (?)", (total,))
+    db.commit()
+
+    return {"status": "saved"}
+
 
 @app.route("/login", methods=["POST"])
 def login():
