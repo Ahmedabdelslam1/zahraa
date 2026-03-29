@@ -1,5 +1,13 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import sqlite3
+
+app = Flask(__name__)
+CORS(app)
+
+def db():
+    return sqlite3.connect("system.db")
+
 
 app = Flask(__name__)
 
@@ -90,6 +98,23 @@ def add_patient():
     db.commit()
 
     return {"status": "added"}
+
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.json
+
+    user = db().execute(
+        "SELECT * FROM users WHERE username=? AND password=?",
+        (data["username"], data["password"])
+    ).fetchone()
+
+    if user:
+        return jsonify({"status": "ok"})
+    else:
+        return jsonify({"status": "error", "message": "بيانات غلط"})
+
+app.run(host="0.0.0.0", port=5000)
+
 
 def setup():
     data = request.json
