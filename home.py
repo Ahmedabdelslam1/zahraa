@@ -1,25 +1,30 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, request, jsonify
 import sqlite3
 
 app = Flask(__name__)
 
-def get_db():
-    return sqlite3.connect("clinic.db")
+def db():
+    return sqlite3.connect("system.db")
 
-@app.route("/")
-def index():
-    db = get_db()
-    patients = db.execute("SELECT * FROM patients").fetchall()
-    return render_template("index.html", patients=patients)
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.json
+    user = db().execute(
+        "SELECT * FROM users WHERE username=? AND password=?",
+        (data["username"], data["password"])
+    ).fetchone()
 
-@app.route("/add_patient", methods=["POST"])
-def add_patient():
-    name = request.form["name"]
-    phone = request.form["phone"]
+    if user:
+        return jsonify({"status": "ok", "branch_id": user[4]})
+    return jsonify({"status": "error"})
 
-    db = get_db()
-    db.execute("INSERT INTO patients (name, phone) VALUES (?,?)", (name, phone))
-    db.commit()
-    return redirect("/")
+@app.route("/patients/<int:branch_id>")
+def patients(branch_id):
+    rows = db().execute(
+        "SELECT * FROM patients WHERE branch_id=?",
+        (branch_id,)
+    ).fetchall()
 
-app.run(debug=True)
+    return jsonify(rows)
+
+app.run()
