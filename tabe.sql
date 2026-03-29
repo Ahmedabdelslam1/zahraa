@@ -9,11 +9,7 @@ CREATE TABLE branches (
     company_id INTEGER
 );
 
-CREATE TABLE patients (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT,
-    phone TEXT
-);
+
 CREATE TABLE users (
     id INTEGER PRIMARY KEY,
     username TEXT,
@@ -21,6 +17,7 @@ CREATE TABLE users (
     role TEXT,
     branch_id INTEGER
 );
+
 CREATE TABLE patients (
     id INTEGER PRIMARY KEY,
     name TEXT,
