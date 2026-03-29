@@ -221,7 +221,7 @@ export default function Patients() {
 
 export default function POS() {
   const [items, setItems] = useState([]);
-  const services = ["كشف", "تحليل", "أشعة", "دواء"];
+  const services = ["كشف", "تحليل", "أشعة", "استشارة"];
 
   const addItem = (name) => {
     setItems([...items, { name, price: 50 }]);
