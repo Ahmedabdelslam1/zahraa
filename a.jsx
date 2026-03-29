@@ -15,6 +15,12 @@ export default function Dashboard() {
 
 import { useState } from "react";
 
+const addItem = (name, fixedPrice) => {
+  const price = prompt("ادخل السعر:", fixedPrice);
+  if (!price) return;
+
+  setItems([...items, { name, price: Number(price) }]);
+};
 export default function POS() {
   const [items, setItems] = useState([]);
   const services = ["كشف", "تحليل", "أشعة", "دواء"];
