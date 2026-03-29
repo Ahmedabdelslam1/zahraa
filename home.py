@@ -64,6 +64,33 @@ def setup():
     return {"status": "ok"}
 
 @app.route("/setup", methods=["POST"])
+
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.json
+
+    user = db.execute(
+        "SELECT * FROM users WHERE username=? AND password=?",
+        (data["username"], data["password"])
+    ).fetchone()
+
+    if user:
+        return {"status": "ok"}
+    return {"status": "error"}
+
+
+@app.route("/patients", methods=["POST"])
+def add_patient():
+    data = request.json
+
+    db.execute(
+        "INSERT INTO patients (name, phone) VALUES (?,?)",
+        (data["name"], data["phone"])
+    )
+    db.commit()
+
+    return {"status": "added"}
+
 def setup():
     data = request.json
     db = db_connect()
